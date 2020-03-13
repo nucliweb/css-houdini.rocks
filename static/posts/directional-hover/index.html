@@ -1,0 +1,94 @@
+<style>
+.Demo {
+}
+.els {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: normal;
+  text-align: center;
+  padding: 50px;
+}
+.els p {
+  margin: 25px auto;
+}
+.big {
+  font-size: 2em;
+}
+.el {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 8px;
+  margin: 0 -8px;
+  color: deeppink;
+  border: solid 0;
+  border-image-source: paint(directional-hover);
+  border-image-outset: calc(var(--pad) * 1px);
+  border-image-slice: 0 fill;
+  --background-opacity: 0;
+  --pad: 10;
+  transition-property: --x, --y, --background-opacity;
+  transition-duration: .35s;
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.el:hover {
+  background-color: #fff;
+}
+.el.hover {
+  --x: 50% !important;
+  --y: 50% !important;
+}
+@supports (border-image-source: paint(foo)) {
+  .el.loaded:hover {
+    background: none;
+  }
+}
+
+.no-transition {
+  transition: none !important;
+}
+
+</style>
+
+<div class="Demo" id="Demo">
+  <div class="els">
+    <p class="big">A simple text with <span class="el">links</span> in it. Oh, a <span class="el">second one</span>. And a <span class="el">last one</span>.</p>
+    <p>Well, technically, these aren’t HTML links, cause <code>paint()</code> function is forbidden on links :(</p>
+  </div>
+  <div class="Control Control--first">
+    <label for="pad"><code>--pad</code></label>
+    <input id="pad" type="range" min="0" max="50" value="10">
+  </div>
+</div>
+
+<pre class="Code"><code>.el {
+  border-image-source: paint(directional-hover);
+  border-image-outset: calc(var(--pad) * 1px);
+  border-image-slice: 0 fill;
+  --background-opacity: 0;
+  --pad: <mark id="valuepad">10</mark>;
+  transition-property: --x, --y, --background-opacity;
+  transition-duration: .35s;
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.el:hover {
+  background-color: #fff;
+}
+@supports (border-image-source: paint(foo)) {
+  .el.loaded:hover {
+    background: none;
+  }
+}</code></pre>
+<pre class="Code"><code class="language-js">$el.addEventListener('mouseenter', evt => {
+  $el.style.setProperty('--x', evt.offsetX)
+  $el.style.setProperty('--y', evt.offsetY)
+  setTimeout(() => {
+    $el.style.setProperty('--x', center.x)
+    $el.style.setProperty('--y', center.y)
+  }, 10)
+})
+$el.addEventListener('mouseleave', evt => {
+  $el.style.setProperty('--x', evt.offsetX)
+  $el.style.setProperty('--y', evt.offsetY)
+})</code></pre>

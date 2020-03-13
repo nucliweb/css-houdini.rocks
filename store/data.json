@@ -183,6 +183,21 @@
           "support": "Chrome/Opera/Edge"
         },
         {
+          "title": "Directional hover backgrounds",
+          "desc": "...",
+          "url": "directional-hover",
+          "properties": [
+            ["--x", "<number> | <length-percentage>", false, 0],
+            ["--startx", "<number>", false, 0],
+            ["--y", "<number> | <length-percentage>", false, 0],
+            ["--starty", "<number>", false, 0],
+            ["--background-opacity", "<number>", false, 1],
+            ["--pad", "<number>", false, 0]
+          ],
+          "tags": ["paint"],
+          "support": "Chrome/Opera/Edge"
+        },
+        {
           "title": "Highlighter marker annotations",
           "desc": "Recreating the iPad’s landing page annotation effect with CSS Houdini",
           "url": "highlighter-marker-annotations",
